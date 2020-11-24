@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e690e2805ffdb6841ac5172aceb3453f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 1
+  isOpen: 0
   duration: 2
   doorObject: {fileID: 7460745201046290481}
   openPosition: {x: 0, y: 2, z: 0}

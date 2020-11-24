@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public bool isOpen = true;
+    public bool isOpen = false;
+    // private bool isOpening = false;
     public float duration = 2.0f;
     public GameObject doorObject;
     public Vector3 openPosition;
@@ -13,18 +14,18 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        doorObject.transform.localPosition = isOpen ? closedPosition : openPosition;
+        doorObject.transform.localPosition = isOpen ? openPosition : closedPosition;
     }
 
     public void Open()
     {
-        isOpen = false;
+        isOpen = true;
         StartCoroutine(SlideDoorObjectTo(openPosition));
     }
 
     public void Close()
     {
-        isOpen = true;
+        isOpen = false;
         StartCoroutine(SlideDoorObjectTo(closedPosition));
     }
 
@@ -34,6 +35,7 @@ public class Door : MonoBehaviour
         float currentTime = 0;
         Transform doorTransform = doorObject.transform;
         Vector3 startPosition = doorTransform.localPosition;
+        // isOpening = true;
         
         while (currentTime < duration)
         {
@@ -42,17 +44,8 @@ public class Door : MonoBehaviour
             currentTime += Time.deltaTime;
             yield return 0;
         }
-        // yield return new WaitForSeconds(step);
 
-        /*
-        for (float time = 0f; time <= duration; time += step)
-        {
-           // get ratio between ft and duration
-           float openPercent = Mathf.InverseLerp(0, duration, time);
-           doorTransform.localPosition = Vector3.Lerp(startPosition, position, openPercent);
-           yield return new WaitForSeconds(step);
-        }
-        */
+        // isOpening = false;
     }
 
 }
