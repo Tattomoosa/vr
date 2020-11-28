@@ -14,4 +14,9 @@ public class DoorLock : MonoBehaviour
         if (obj.CompareTag("key"))
             onUnlock.Invoke();
     }
+
+    private void OnBalloonPop()
+    {
+        onUnlock.Invoke();
+    }
 }

@@ -1,6 +1,7 @@
 //======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: BALLOONS!!
+// Note: Code modified by Chasity to open door when balloon pops
 //
 //=============================================================================
 
@@ -38,6 +39,8 @@ namespace Valve.VR.InteractionSystem
 		private bool bParticlesSpawned = false;
 
 		private static float s_flLastDeathSound = 0f;
+
+		public GameObject roomCDoor;
 
 
 		//-------------------------------------------------
@@ -80,6 +83,10 @@ namespace Valve.VR.InteractionSystem
 				GameObject particleObject = Instantiate( particlePrefab, transform.position, transform.rotation ) as GameObject;
 				particleObject.GetComponent<ParticleSystem>().Play();
 				Destroy( particleObject, 2f );
+
+				//open door
+				roomCDoor = GameObject.Find("RoomCLock");
+				roomCDoor.SendMessage("OnBalloonPop");
 			}
 
 			if ( sound != null )
@@ -93,9 +100,6 @@ namespace Valve.VR.InteractionSystem
 				sound.Play();
 				s_flLastDeathSound = Time.time;
 			}
-
-			//open door
-			//GameObject roomCDoor = GameObject.Find("RoomCDoor");
 		}
 
 
