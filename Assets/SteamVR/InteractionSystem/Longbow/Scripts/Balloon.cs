@@ -93,6 +93,9 @@ namespace Valve.VR.InteractionSystem
 				sound.Play();
 				s_flLastDeathSound = Time.time;
 			}
+
+			//open door
+			//GameObject roomCDoor = GameObject.Find("RoomCDoor");
 		}
 
 
