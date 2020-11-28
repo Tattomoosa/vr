@@ -40,8 +40,6 @@ namespace Valve.VR.InteractionSystem
 
 		private static float s_flLastDeathSound = 0f;
 
-		public GameObject roomCDoor;
-
 
 		//-------------------------------------------------
 		void Start()
@@ -85,7 +83,7 @@ namespace Valve.VR.InteractionSystem
 				Destroy( particleObject, 2f );
 
 				//open door
-				roomCDoor = GameObject.Find("RoomCLock");
+				GameObject roomCDoor = GameObject.Find("RoomCLock");
 				roomCDoor.SendMessage("OnBalloonPop");
 			}
 
