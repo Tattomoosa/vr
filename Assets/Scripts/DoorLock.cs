@@ -8,6 +8,8 @@ public class DoorLock : MonoBehaviour
 {
     public UnityEvent onUnlock;
     private bool isLocked = true;
+    public GameObject keyPrefab;
+
     private void OnTriggerEnter(Collider other)
     {
         GameObject obj = other.gameObject;
@@ -17,6 +19,15 @@ public class DoorLock : MonoBehaviour
 
     private void OnBalloonPop()
     {
-        onUnlock.Invoke();
+        //option 1. Open door on collision b/w arrow and balloon
+        //onUnlock.Invoke();
+        
+        //option 2. Create key when arrow collides with balloon
+        GameObject table = GameObject.Find("RoomCTable");
+        if (keyPrefab == null)
+        {
+            return;
+        }
+        GameObject key = Instantiate(keyPrefab, new Vector3(table.transform.position.x, table.transform.position.y+1f, table.transform.position.z), table.transform.rotation) as GameObject;
     }
 }
