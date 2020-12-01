@@ -17,11 +17,12 @@ public class ComboLock : MonoBehaviour
             comboCheck.Invoke();
     }
 
-    private void onTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         Debug.Log("exit");
         GameObject obj = other.gameObject;
         if(obj.CompareTag("key"))
             decCombo.Invoke();
+            comboCheck.Invoke();
     }
 }

@@ -66,9 +66,9 @@ public class ComboDoor : MonoBehaviour
         Debug.Log("check");
         if(currLocks == totalLocks)
             Open();
-        /*
+        
         else
             Close();
-        */
+        
     }
 }
