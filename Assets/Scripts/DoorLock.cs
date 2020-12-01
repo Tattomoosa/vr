@@ -24,10 +24,17 @@ public class DoorLock : MonoBehaviour
         
         //option 2. Create key when arrow collides with balloon
         GameObject table = GameObject.Find("RoomCTable");
+        GameObject roomCKey = GameObject.Find("RoomCKey");
+
         if (keyPrefab == null)
         {
             return;
         }
+        if (roomCKey != null)
+        {
+            return;
+        }
         GameObject key = Instantiate(keyPrefab, new Vector3(table.transform.position.x, table.transform.position.y+1f, table.transform.position.z), table.transform.rotation) as GameObject;
+        key.name = "RoomCKey";
     }
 }
