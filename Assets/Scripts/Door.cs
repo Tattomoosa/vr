@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Door : MonoBehaviour
     public GameObject doorObject;
     public Vector3 openPosition;
     public Vector3 closedPosition;
+
+    public UnityEvent onOpen;
 
     private void Start()
     {
@@ -36,6 +39,7 @@ public class Door : MonoBehaviour
         Transform doorTransform = doorObject.transform;
         Vector3 startPosition = doorTransform.localPosition;
         // isOpening = true;
+        onOpen.Invoke();
         
         while (currentTime < duration)
         {

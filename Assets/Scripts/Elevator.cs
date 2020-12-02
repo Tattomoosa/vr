@@ -18,6 +18,7 @@ public class Elevator : MonoBehaviour
     public float waitAfterDoorsClose = 0.5f;
     public UnityEvent onStartMovingUp;
     public UnityEvent onStartMovingDown;
+    public UnityEvent onStartMovingAfterDoors;
     public UnityEvent onEndMoving;
 
     private bool isMoving = false;
@@ -66,23 +67,25 @@ public class Elevator : MonoBehaviour
 
     private IEnumerator GoToFloor_(int floor)
     {
-
-        Transform playerParent = player.parent;
-        player.parent = transform;
-        leftDoor.Close();
-        rightDoor.Close();
-        yield return new WaitForSeconds(leftDoor.duration + waitAfterDoorsClose);
         isMoving = true;
         Transform t = transform;
         float startY = t.position.y;
         float endY = floors[floor].yPos;
         float moveDirection = Mathf.Sign(endY - startY);
         float currentY = startY;
-        
+
         if (moveDirection > 0)
             onStartMovingUp.Invoke();
         else
             onStartMovingDown.Invoke();
+        
+        leftDoor.Close();
+        rightDoor.Close();
+        yield return new WaitForSeconds(leftDoor.duration + waitAfterDoorsClose);
+        onStartMovingAfterDoors.Invoke();
+        
+        Transform playerParent = player.parent;
+        player.parent = transform;
         
         while (
             (moveDirection > 0 && currentY < endY) ||
